@@ -4,11 +4,9 @@ class Greed
   end
 
   def score_of(*dice)
-    score = 0
-    dice.each do |die_value|
-      score += score_of_one(die_value)
+    dice.inject(0) do |running_total, die_value|
+      running_total + score_of_one(die_value)
     end
-    score
   end
 
   def score_of_one(die_value)

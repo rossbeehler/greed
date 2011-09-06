@@ -1,16 +1,31 @@
 class Greed
+  def initialize
+    @counts = [0,0,0,0,0,0]
+  end
+
   def score_of(*dice)
     score = 0
     dice.each do |die_value|
-      die = DieFactory.create_die(die_value)
-
-      score += die.individual_value
-
-      if dice.third_of(die_value)
-        score += die.triplett_bonus
-      end
+      score += score_of_one(die_value)
     end
     score
+  end
+
+  def score_of_one(die_value)
+    die = DieFactory.create_die(die_value)
+
+    score = die.individual_value
+
+    if third_of(die_value)
+      score += die.triplett_bonus
+    end
+
+    score
+  end
+
+  def third_of(die_value)
+    @counts[die_value-1] += 1
+    @counts[die_value-1] == 3
   end
 end
 
@@ -57,15 +72,5 @@ class DieOfNonOneOrFive
 
   def triplett_bonus
     @die_value * 100
-  end
-end
-
-class Array
-  def third_of(die_value)
-    if (@counts == nil)
-      @counts = [0,0,0,0,0,0]
-    end
-    @counts[die_value-1] += 1
-    @counts[die_value-1] == 3
   end
 end

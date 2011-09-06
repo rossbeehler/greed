@@ -14,16 +14,6 @@ class Greed
   end
 end
 
-class Array
-  def third_of(die_value)
-    if (@counts == nil)
-      @counts = [0,0,0,0,0,0]
-    end
-    @counts[die_value-1] += 1
-    @counts[die_value-1] == 3
-  end
-end
-
 class DieFactory
   def self.create_die(die_value)
     if die_value == 1
@@ -67,5 +57,15 @@ class DieOfNonOneOrFive
 
   def triplett_bonus
     @die_value * 100
+  end
+end
+
+class Array
+  def third_of(die_value)
+    if (@counts == nil)
+      @counts = [0,0,0,0,0,0]
+    end
+    @counts[die_value-1] += 1
+    @counts[die_value-1] == 3
   end
 end

@@ -1,4 +1,4 @@
-require 'greed'
+require File.expand_path('greed')
 
 describe Greed, "score_of" do
   let(:greed) { Greed.new }
